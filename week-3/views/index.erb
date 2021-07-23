@@ -1,0 +1,24 @@
+<h1> Items </h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+    </tr>
+    <% objects.each do |object| %>
+    <tr>
+        <th><%= object.name %></th>
+        <th><%= object.price %></th>
+        <th><%= object.category %></th>
+        <form action="/items/delete" method="POST">
+            <th><button type="submit" name="id" value="<%= object.id %>">Delete</button></th>
+        </form>
+        <form action="/items/edit-form" method="POST">
+            <th><button type="submit" name="id" value="<%= object.id %>">Edit</button></th>
+        </form>
+    </tr>
+    <% end %>
+</table>    
+<br>
+<a href="/items/new">Add new item</a>

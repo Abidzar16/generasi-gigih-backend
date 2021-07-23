@@ -1,0 +1,19 @@
+<h1>Create new item</h1>
+
+<form method="POST" action="/items/edit-process">
+  <input type="hidden" id="id" name="id" value="<%= item.id %>" readonly>
+
+  <label for="name">Item name:</label>
+  <input type="text" id="name" name="name" placeholder="<%= item.name %>" value="<%= item.name %>"><br><br>
+  
+  <label for="price">Item price:</label>
+  <input type="text" id="price" name="price" placeholder="<%= item.price %>" value="<%= item.price %>"><br><br>
+
+  <label for="category">Choose a category:</label>
+  <select name="category">
+    <% categories.each do |category| %>
+        <option value="<%= category.id %>"><%= category.name %></option>
+    <% end %>    
+  </select><br><br>
+  <input type="submit">
+</form>
