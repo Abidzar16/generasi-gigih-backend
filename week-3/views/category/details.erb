@@ -1,16 +1,14 @@
-<h1> Items </h1>
+<h1> Category:  <%= items.first.name %></h1>
 
 <table>
     <tr>
         <th>Name</th>
         <th>Price</th>
-        <th>Category</th>
     </tr>
     <% items.each do |item| %>
     <tr>
         <th><%= item.name %></th>
         <th><%= item.price %></th>
-        <th><%= item.category %></th>
         <form action="/items/delete" method="POST">
             <th><button type="submit" name="id" value="<%= item.id %>">Delete</button></th>
         </form>
@@ -21,6 +19,5 @@
     <% end %>
 </table>    
 <br>
-<a href="/items/new">Add new item</a>
-<br>
-<a href="/category">Show Cateogries</a>
+<a href="/category">Back to Main</a>
+<a href="/category">Back to Cateogries</a>

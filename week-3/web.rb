@@ -1,50 +1,53 @@
 require 'sinatra'
 require 'sinatra/reloader'
-require_relative './db_connector'
+require_relative './db/db_connector'
+require_relative './controller/item'
+require_relative './controller/category'
+
+categoryController = CategoryController.new
 
 get '/' do
-    objects = get_all_items_with_categories
-    erb :index, locals:{
-        objects: objects
-    }
+    itemService = ItemService.new
+    itemService.show_all_items_with_categories
 end
 
 get '/items/new' do
-    categories = get_all_categories
-    erb :create, locals:{
-        categories: categories
-    }
+    itemService = ItemService.new
+    itemService.create_item_form
 end
 
 post '/items/new' do
-    name = params[:name]
-    price = params[:price]
-    category = params[:category]
-    post_an_items(name,price,category)
-    redirect  "/"
+    itemService = ItemService.new
+    itemService.create_item(params)
 end
 
 post '/items/delete' do
-    id = params[:id]
-    delete_an_items(id)
-    redirect  "/"
+    itemService = ItemService.new
+    itemService.delete_item(params)
 end
 
 post '/items/edit-form' do
-    id = params[:id]
-    categories = get_all_categories
-    item = get_spesific_item(id)
-    erb :edit, locals:{
-        categories: categories,
-        item: item[0]
-    }
+    itemService = ItemService.new
+    itemService.edit_item_form(params)
 end    
 
 post '/items/edit-process' do
-    id = params[:id]
-    name = params[:name]
-    price = params[:price]
-    category = params[:category]
-    edit_an_items(id,name,price,category)
-    redirect  "/"
-end  
+    itemService = ItemService.new
+    itemService.edit_item(params)
+end
+
+get '/category' do
+    categoryController.show_categories
+end
+
+get '/category/new' do
+    categoryController.create_item_form
+end
+
+post '/category/new' do
+    categoryController.create_item(params)
+end
+
+get '/category/details' do
+    categoryController.show_categories_items(params)
+end
