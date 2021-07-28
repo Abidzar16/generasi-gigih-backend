@@ -29,7 +29,7 @@ describe Wli do
         expect(likes).to eq("no one like this")
     end
 
-    it "likes function 4 people" do
+    it "likes function more than 3 people" do
         wli = Wli.new(['A','B','C','D'])
         likes = wli.likes
 
