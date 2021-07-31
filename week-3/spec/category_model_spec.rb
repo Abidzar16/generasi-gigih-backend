@@ -1,10 +1,9 @@
 require './models/category.rb'
 require './db/db_connector'
-
-client = create_db_client
+require_relative "spec_helper"
 
 describe Category do
-  describe 'get_all_categories' do
+  describe '#get_all_categories' do
     let(:testing) {Category.get_all_categories}
 
     it 'return all category' do
@@ -13,13 +12,13 @@ describe Category do
 
   end
 
-  describe 'get_by_id' do
-    let(:testing) {Category.get_by_id(2)}
-    equal = Category.new(2,'beverage')
+  describe '#get_by_id' do
+    input = Category.new(1,'beverage')
+    let(:testing) {Category.get_by_id(1)}
 
-    it 'return category by id true' do
-      expect(testing.id).to eq(equal.id)
-      expect(testing.name).to eq(equal.name)
+    it 'return category by id accurately' do
+      expect(testing.id).to eq(input.id)
+      expect(testing.name).to eq(input.name)
     end
   end
 
@@ -37,8 +36,8 @@ describe Category do
     category.insert
 
     output = Category.get_all_categories
-    puts output.last['id']
-    id = output.last['id']
+    puts output.last.id
+    id = output.last.id
     category = Category.new(id, nil)
     let(:testing) {category.delete}
 
