@@ -5,34 +5,29 @@ require_relative './controller/item'
 require_relative './controller/category'
 
 categoryController = CategoryController.new
+itemService = ItemService.new
 
 get '/' do
-    itemService = ItemService.new
     itemService.show_all_items_with_categories
 end
 
 get '/items/new' do
-    itemService = ItemService.new
     itemService.create_item_form
 end
 
 post '/items/new' do
-    itemService = ItemService.new
     itemService.create_item(params)
 end
 
 post '/items/delete' do
-    itemService = ItemService.new
     itemService.delete_item(params)
 end
 
 post '/items/edit-form' do
-    itemService = ItemService.new
     itemService.edit_item_form(params)
 end    
 
 post '/items/edit-process' do
-    itemService = ItemService.new
     itemService.edit_item(params)
 end
 
@@ -41,13 +36,25 @@ get '/category' do
 end
 
 get '/category/new' do
-    categoryController.create_item_form
+    categoryController.create_category_form
 end
 
 post '/category/new' do
-    categoryController.create_item(params)
+    categoryController.create_category(params)
 end
 
 get '/category/details' do
     categoryController.show_categories_items(params)
+end
+
+post '/category/delete' do
+    categoryController.delete_category(params)
+end
+
+post '/category/edit-process' do
+    categoryController.edit_category(params)
+end
+
+get '/category/edit-form' do
+    categoryController.edit_category_form(params)
 end

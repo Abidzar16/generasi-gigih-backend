@@ -26,7 +26,7 @@ class Item
         @category
     end
 
-    def self.get_spseific_items(id)
+    def self.get_spesific_items(id)
         client = create_db_client
         rawData = client.query("SELECT items.id, items.name, items.price, 
             categories.id AS category_id, categories.name AS category
@@ -36,7 +36,6 @@ class Item
             WHERE categories.id = '#{id[:id]}'")
         items = Array.new
         rawData.each do |data|
-            puts data.inspect
             item = Item.new(data["id"], data["name"], data["price"], data["category"])
             items.push(item)
         end
@@ -84,7 +83,7 @@ class Item
         client.query("INSERT INTO items
                     (`name`,`price`) values ('#{@name}','#{@price}');");
         id = client.query("SELECT id FROM items ORDER BY id DESC limit 1");
-        puts id.first['id']
+        
         client.query("INSERT item_categories (`category_id`, `item_id`) 
                     VALUES ('#{@category}','#{id.first['id']}');");
     end

@@ -1,0 +1,10 @@
+<h1>Edit category</h1>
+
+<form method="POST" action="/category/edit-process">
+  <input type="hidden" id="id" name="id" value="<%= category.id %>" readonly>
+  <label for="name">Category name:</label>
+  <input type="text" id="name" name="name" placeholder="<%= category.name %>" required><br><br>
+  
+  <br><br>
+  <input type="submit">
+</form>

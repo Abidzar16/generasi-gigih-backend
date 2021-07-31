@@ -9,16 +9,15 @@ class CategoryController
     end
 
     def show_categories_items(params)
-        items = Item.get_spseific_items(id: params['id'])
+        items = Item.get_spesific_items(id: params['id'])
         renderer = ERB.new(File.read("./views/category/details.erb"))
         renderer.result(binding)
     end
 
     def create_category(params)
-        category = Category.new(name: params['name'])
+        category = Category.new(nil, params['name'])
         category.insert
-        renderer = ERB.new(File.read("./views/category/form.erb"))
-        renderer.result(binding)
+        self.show_categories
     end
 
     def create_category_form
@@ -26,22 +25,21 @@ class CategoryController
         renderer.result(binding)
     end
 
-    def edit_category
-        category = Category.new(id: params['id'], name: params['name'])
+    def edit_category(params)
+        category = Category.new(params['id'],params['name'])
         category.edit
-        renderer = ERB.new(File.read("./views/category/form.erb"))
+        self.show_categories
+    end
+
+    def edit_category_form(params)
+        category = Category.get_by_id(params['id'])
+        renderer = ERB.new(File.read("./views/category/edit.erb"))
         renderer.result(binding)
     end
 
-    def edit_category_form
-        renderer = ERB.new(File.read("./views/category/form.erb"))
-        renderer.result(binding)
-    end
-
-    def delete_category
-        category = Category.new(id: params['id'])
+    def delete_category(params)
+        category = Category.new(params['id'],nil)
         category.delete
-        renderer = ERB.new(File.read("./views/category/index.erb"))
-        renderer.result(binding)
+        self.show_categories
     end
 end    
