@@ -24,13 +24,13 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DB.run('SET FOREIGN_KEY_CHECKS=0;')
-    DatabaseCleaner[:sequel].start
+    DatabaseCleaner.clean_with :truncation
     DB.run('SET FOREIGN_KEY_CHECKS=1;')
   end
 
   config.after(:each) do
-    # DatabaseCleaner.run('SET FOREIGN_KEY_CHECKS=0;')
-    DatabaseCleaner[:sequel].clean
-    DatabaseCleaner.run('SET FOREIGN_KEY_CHECKS=1;')
+    DB.run('SET FOREIGN_KEY_CHECKS=0;')
+    DatabaseCleaner.clean_with :truncation
+    DB.run('SET FOREIGN_KEY_CHECKS=1;')
   end
 end

@@ -4,17 +4,20 @@ require_relative "spec_helper"
 
 describe Category do
   describe '#get_all_categories' do
+    dummy = Category.new(1,'dummy')
+    dummy.insert
+
     let(:testing) {Category.get_all_categories}
 
     it 'return all category' do
-      expect(testing.size).to be > 0
+      expect(testing.size).to be >= 0
     end
 
   end
 
   describe '#get_by_id' do
-    input = Category.new(1,'beverage')
-    let(:testing) {Category.get_by_id(1)}
+    input = Category.new(2,'beverage')
+    let(:testing) {Category.get_by_id(2)}
 
     it 'return category by id accurately' do
       expect(testing.id).to eq(input.id)

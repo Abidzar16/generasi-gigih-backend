@@ -10,7 +10,7 @@ describe CategoryController do
       result = categoryController.show_categories
 
       expect(result).to include(
-        '<form action="/category/details" method="GET">',
+        '<th>List of Categories</th>',
       )
     end
   end
@@ -26,7 +26,10 @@ describe CategoryController do
       result = categoryController.show_categories_items(params)
 
       expect(result).to include(
-        '<form action="/items/delete" method="POST">',
+        '<tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>',
       )
     end
   end
